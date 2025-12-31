@@ -1,0 +1,7 @@
+{
+  "name": "Copy of Breathe Better Delhi - Ward Action Dashboard",
+  "description": "A premium, Apple-inspired pollution action dashboard featuring real-time ward-wise monitoring, AI-powered insights, and citizen action tools.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
