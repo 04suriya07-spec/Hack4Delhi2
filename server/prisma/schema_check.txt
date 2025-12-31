@@ -1,0 +1,55 @@
+﻿generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = "postgresql://postgres:[YOUR-PASSWORD]@db.dlxmxbrqksatmmyzouwx.supabase.co:5432/postgres"
+}
+
+model User {
+  id           String   @id @default(uuid())
+  email        String   @unique
+  password     String
+  name         String
+  role         Role     @default(CITIZEN)
+  reports      Report[]
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Ward {
+  id        String   @id @default(uuid())
+  name      String   @unique
+  aqi       Int
+  pm25      Float
+  pm10      Float
+  no2       Float
+  so2       Float
+  co        Float
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Report {
+  id          String   @id @default(uuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  category    String
+  description String
+  location    String
+  status      Status   @default(PENDING)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+enum Role {
+  CITIZEN
+  OFFICER
+}
+
+enum Status {
+  PENDING
+  ACTIVE
+  RESOLVED
+}
